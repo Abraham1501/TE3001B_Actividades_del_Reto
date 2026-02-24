@@ -1,0 +1,27 @@
+[0.375s] Invoking command in '/home/sukira/ros/manchester/motrol_control/src/motor_control': PYTHONPATH=/home/sukira/ros/manchester/motrol_control/build/motor_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/sukira/ros/manchester/motrol_control/install/motor_control/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/motor_control build --build-base /home/sukira/ros/manchester/motrol_control/build/motor_control/build install --record /home/sukira/ros/manchester/motrol_control/build/motor_control/install.log --single-version-externally-managed install_data
+[0.508s] running egg_info
+[0.508s] writing ../../build/motor_control/motor_control.egg-info/PKG-INFO
+[0.509s] writing dependency_links to ../../build/motor_control/motor_control.egg-info/dependency_links.txt
+[0.509s] writing entry points to ../../build/motor_control/motor_control.egg-info/entry_points.txt
+[0.510s] writing requirements to ../../build/motor_control/motor_control.egg-info/requires.txt
+[0.510s] writing top-level names to ../../build/motor_control/motor_control.egg-info/top_level.txt
+[0.511s] reading manifest file '../../build/motor_control/motor_control.egg-info/SOURCES.txt'
+[0.511s] adding license file 'LICENSE'
+[0.512s] writing manifest file '../../build/motor_control/motor_control.egg-info/SOURCES.txt'
+[0.512s] running build
+[0.512s] running build_py
+[0.512s] copying motor_control/controller.py -> /home/sukira/ros/manchester/motrol_control/build/motor_control/build/lib/motor_control
+[0.512s] running install
+[0.512s] running install_lib
+[0.513s] copying /home/sukira/ros/manchester/motrol_control/build/motor_control/build/lib/motor_control/controller.py -> /home/sukira/ros/manchester/motrol_control/install/motor_control/lib/python3.10/site-packages/motor_control
+[0.513s] byte-compiling /home/sukira/ros/manchester/motrol_control/install/motor_control/lib/python3.10/site-packages/motor_control/controller.py to controller.cpython-310.pyc
+[0.514s] running install_data
+[0.514s] running install_egg_info
+[0.515s] removing '/home/sukira/ros/manchester/motrol_control/install/motor_control/lib/python3.10/site-packages/motor_control-0.0.0-py3.10.egg-info' (and everything under it)
+[0.515s] Copying ../../build/motor_control/motor_control.egg-info to /home/sukira/ros/manchester/motrol_control/install/motor_control/lib/python3.10/site-packages/motor_control-0.0.0-py3.10.egg-info
+[0.516s] running install_scripts
+[0.529s] Installing controller script to /home/sukira/ros/manchester/motrol_control/install/motor_control/lib/motor_control
+[0.530s] Installing dc_motor script to /home/sukira/ros/manchester/motrol_control/install/motor_control/lib/motor_control
+[0.530s] Installing set_point script to /home/sukira/ros/manchester/motrol_control/install/motor_control/lib/motor_control
+[0.530s] writing list of installed files to '/home/sukira/ros/manchester/motrol_control/build/motor_control/install.log'
+[0.546s] Invoked command in '/home/sukira/ros/manchester/motrol_control/src/motor_control' returned '0': PYTHONPATH=/home/sukira/ros/manchester/motrol_control/build/motor_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/sukira/ros/manchester/motrol_control/install/motor_control/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/motor_control build --build-base /home/sukira/ros/manchester/motrol_control/build/motor_control/build install --record /home/sukira/ros/manchester/motrol_control/build/motor_control/install.log --single-version-externally-managed install_data

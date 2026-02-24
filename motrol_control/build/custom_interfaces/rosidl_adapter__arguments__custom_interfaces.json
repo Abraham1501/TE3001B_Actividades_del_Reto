@@ -1,0 +1,6 @@
+{
+  "package_name": "custom_interfaces",
+  "non_idl_tuples": [
+    "/home/sukira/ros/manchester/motrol_control/src/custom_interfaces:srv/SetProcessBool.srv"
+  ]
+}
