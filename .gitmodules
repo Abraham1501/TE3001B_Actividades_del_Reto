@@ -1,3 +1,7 @@
 [submodule "TE3001B_Intelligent_Robotics_Implementation_2026"]
 	path = TE3001B_Intelligent_Robotics_Implementation_2026
 	url = https://github.com/ManchesterRoboticsLtd/TE3001B_Intelligent_Robotics_Implementation_2026.git
+[submodule "ros2_ws/src/micro_ros_setup"]
+	path = ros2_ws/src/micro_ros_setup
+	url = https://github.com/micro-ROS/micro_ros_setup.git
+	branch = humble
