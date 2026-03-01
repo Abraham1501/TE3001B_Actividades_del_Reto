@@ -15,6 +15,26 @@ After cloning this repository, initialize and pull the submodule:
 git submodule update --init --recursive
 ```
 
+## Workspace: ros2_ws
+
+The `ros2_ws` directory contains the ROS 2 workspace with packages for the challenge activities.
+
+### Micro-ROS Setup
+
+To set up Micro-ROS for ESP32 microcontroller communication, run the automated setup script:
+
+```bash
+./setup_microros.sh
+```
+
+This script:
+- Installs required dependencies (vcstool, rosdep packages)
+- Builds the ROS 2 workspace
+- Creates and builds the Micro-ROS agent from the submodule
+- Configures serial port permissions
+
+For detailed setup instructions, see [MICROROS_SETUP.md](MICROROS_SETUP.md)
+
 ### Updating the submodule to the latest version
 
 Since the course material is updated regularly, follow these steps to pull the latest changes:
