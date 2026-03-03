@@ -22,7 +22,8 @@ setup(
     entry_points={
         'console_scripts': [
             'motor_commander = motor_control.motor_commander:main',
-            'motor_monitor = motor_control.motor_monitor:main'
+            'motor_monitor = motor_control.motor_monitor:main',
+            'pi_velocity_controller = motor_control.pi_velocity_controller:main',
         ],
     },
 )

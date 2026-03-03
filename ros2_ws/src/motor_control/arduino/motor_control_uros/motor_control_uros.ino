@@ -1,5 +1,16 @@
 /*
-
+ * Copyright (c) 2019, Manchester Robotics Ltd.
+ * All rights reserved.
+ *
+ * This software is provided AS-IS for the TE3001B Challenge
+ * 
+ * MOTOR NODE - Micro-ROS ESP32 Application
+ * 
+ * This ROS 2 node controls a DC motor via an L298N motor driver.
+ * It subscribes to /cmd_pwm (Int16: -255 to +255) and outputs:
+ * - PWM signal for motor speed control
+ * - GPIO direction signals for motor direction control
+ * 
  * Features:
  * - Subscribes to /cmd_pwm topic (motor speed command)
  * - Publishes motor feedback (/motor/rpm, /motor/encoder, /motor/state)
@@ -73,6 +84,7 @@ std_msgs__msg__Int16 state_msg;          // Motor state (0=stopped, 1=running)
   if (uxr_millis() - init > MS) { X; init = uxr_millis();} \
 } while (0)
 
+// ======== Motor Control Variables ========
 volatile long encoderCountTotal = 0;          // Total encoder pulse count
 volatile unsigned long lastCmdReceivedMs = 0; // Timestamp of last /cmd_pwm message
 
@@ -85,6 +97,7 @@ volatile int16_t currentPwmCommand = 0;
 const int16_t PWM_CMD_MIN = -255;
 const int16_t PWM_CMD_MAX = 255;
 
+// ======== Micro-ROS Connection State Machine ========
 enum states {
   WAITING_AGENT,        // Waiting for ROS 2 agent connection
   AGENT_AVAILABLE,      // Agent detected
@@ -92,10 +105,12 @@ enum states {
   AGENT_DISCONNECTED    // Connection lost
 } state;
 
+// ======== Function Prototypes ========
 bool create_entities();
 void destroy_entities();
 void apply_motor_command();
 
+// ======== Interrupt Service Routine (ISR) - Encoder Phase A ========
 // Called on rising edge of phase A only.
 // Direction is determined by the state of phase B at that instant.
 void IRAM_ATTR isrEncoderA() {
@@ -106,6 +121,7 @@ void IRAM_ATTR isrEncoderA() {
   }
 }
 
+// ======== Subscriber Callback: Receives Motor Command ========
 // Processes incoming PWM command from /cmd_pwm topic
 // Command range: -255 (reverse) to +255 (forward)
 void cmd_pwm_callback(const void * msgin) {
@@ -116,6 +132,7 @@ void cmd_pwm_callback(const void * msgin) {
   lastCmdReceivedMs = millis();
 }
 
+// ======== Control Timer Callback ========
 // Executes motor control loop at fixed sample time (100ms)
 // - Calculates RPM from encoder pulses
 // - Publishes feedback telemetry
@@ -163,6 +180,7 @@ void control_timer_callback(rcl_timer_t * timer, int64_t last_call_time) {
   }
 }
 
+// ======== Apply Motor Command ========
 // Translates PWM command to motor driver GPIO signals
 // Positive: Forward (IN1=HIGH, IN2=LOW)
 // Negative: Reverse (IN1=LOW, IN2=HIGH)
@@ -194,6 +212,7 @@ void apply_motor_command() {
   ledcWrite(PWM_CHANNEL, pwmDuty);
 }
 
+// ======== Setup Function ========
 void setup() {
   // Initialize Serial for debugging
   Serial.begin(115200);
@@ -232,6 +251,7 @@ void setup() {
   Serial.println("Setup complete. Waiting for ROS 2 agent...\n");
 }
 
+// ======== Main Loop Function ========
 void loop() {
   switch (state) {
 
@@ -278,6 +298,7 @@ void loop() {
   }
 }
 
+// ======== ROS 2 Entity Creation ========
 bool create_entities() {
   Serial.println("Creating ROS 2 entities...");
   
@@ -334,6 +355,7 @@ bool create_entities() {
   return true;
 }
 
+// ======== ROS 2 Entity Cleanup ========
 void destroy_entities() {
   rmw_context_t * rmw_context = rcl_context_get_rmw_context(&support.context);
   (void) rmw_uros_set_context_entity_destroy_session_timeout(rmw_context, 0);
