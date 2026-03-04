@@ -24,6 +24,7 @@ setup(
             'motor_commander = motor_control.motor_commander:main',
             'motor_monitor = motor_control.motor_monitor:main',
             'pi_velocity_controller = motor_control.pi_velocity_controller:main',
+            'sine_wave_publisher = motor_control.sine_wave_publisher:main',
         ],
     },
 )

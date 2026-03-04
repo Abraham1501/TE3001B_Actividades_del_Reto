@@ -35,6 +35,36 @@ This script:
 
 For detailed setup instructions, see [MICROROS_SETUP.md](MICROROS_SETUP.md)
 
+### Arduino IDE Setup
+
+After setting up the Micro-ROS agent, configure Arduino IDE with Micro-ROS libraries for ESP32:
+
+👉 **See [ARDUINO_IDE_SETUP.md](ARDUINO_IDE_SETUP.md)** for complete instructions
+
+Key steps:
+1. Install ESP32 board support (version 2.0.17)
+2. Add Micro-ROS Arduino library (v2.0.7-humble)
+3. Configure serial port permissions
+4. Upload sketches to ESP32
+
+### Motor Control Package
+
+The `ros2_ws/src/motor_control` package provides Micro-ROS-based DC motor control:
+
+- **Subscribe to** `/cmd_pwm` for motor commands (-255 to +255)
+- **Publish** motor feedback: `/motor/rpm`, `/motor/encoder`, `/motor/state`
+- Works with ESP32/Hackerboard + L298N motor driver
+
+**Quick usage:**
+```bash
+# Upload arduino/motor_node.ino to ESP32 (see ARDUINO_IDE_SETUP.md)
+# Start ROS 2 agent and then:
+ros2 run motor_control motor_commander -- --pwm 150  # Forward
+ros2 run motor_control motor_monitor                  # Monitor feedback
+```
+
+See [MOTOR_NODE.md](MOTOR_NODE.md) and [motor_control README](ros2_ws/src/motor_control/README.md) for details.
+
 ### Updating the submodule to the latest version
 
 Since the course material is updated regularly, follow these steps to pull the latest changes:

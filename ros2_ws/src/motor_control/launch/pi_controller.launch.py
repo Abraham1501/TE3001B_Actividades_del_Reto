@@ -1,25 +1,16 @@
 """
-PI Velocity Controller Launch File
+Start the Micro-ROS agent in a separate terminal:
+    ros2 run micro_ros_agent micro_ros_agent serial --dev /dev/ttyUSB0
 
-Starts the closed-loop PI velocity controller together with the motor
-monitor and an rqt_plot window showing reference and actual RPM.
+Launch this file:
+    ros2 launch motor_control pi_controller.launch.py
 
-How to run
-----------
-1. Flash motor_node.ino to the ESP32 (see arduino/ directory).
-2. Start the Micro-ROS agent in a separate terminal:
-       ros2 run micro_ros_agent micro_ros_agent serial --dev /dev/ttyUSB0
-
-3. Launch this file:
-       ros2 launch motor_control pi_controller.launch.py
-
-4. Set a velocity reference from another terminal:
+Set a velocity reference from another terminal:
        ros2 topic pub /cmd_vel_rpm std_msgs/msg/Float32 "data: 60.0"   # 60 RPM fwd
        ros2 topic pub /cmd_vel_rpm std_msgs/msg/Float32 "data: -40.0"  # 40 RPM rev
        ros2 topic pub /cmd_vel_rpm std_msgs/msg/Float32 "data: 0.0"    # stop
 
 Launch arguments
-----------------
 kp          : Proportional gain   (default 0.55)
 ki          : Integral gain       (default 2.0)
 rpm_max     : Maximum RPM         (default 110.0)
@@ -37,7 +28,6 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
 
-    # ── Declare tunable launch arguments ─────────────────────────────────────
     kp_arg = DeclareLaunchArgument(
         'kp', default_value='0.55',
         description='PI proportional gain')
@@ -54,7 +44,6 @@ def generate_launch_description():
         'sample_time', default_value='0.1',
         description='Control loop period in seconds (0.1 = 100 ms)')
 
-    # ── Nodes ─────────────────────────────────────────────────────────────────
 
     pi_controller = Node(
         package='motor_control',
@@ -76,7 +65,6 @@ def generate_launch_description():
         output='screen',
     )
 
-    # ── Visualisation ─────────────────────────────────────────────────────────
     # Plot 1: tracking — setpoint vs actual RPM
     rqt_plot_tracking = ExecuteProcess(
         cmd=[
@@ -110,7 +98,7 @@ def generate_launch_description():
         sample_time_arg,
         pi_controller,
         motor_monitor,
-        rqt_plot_tracking,
-        rqt_plot_effort,
-        rqt_graph,
+        # rqt_plot_tracking,
+        # rqt_plot_effort,
+        # rqt_graph,
     ])

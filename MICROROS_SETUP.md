@@ -103,7 +103,6 @@ The agent will wait for an ESP32 to connect on the serial port.
 ros2_ws/
 ├── src/
 │   ├── micro_ros_setup/       ← Submodule with setup scripts
-│   ├── signal_proc/           ← Your signal processing package
 │   ├── uros/                  ← Generated (ignored in git)
 │   │   ├── micro-ROS-Agent/
 │   │   └── micro_ros_msgs/
@@ -144,10 +143,20 @@ Install: `sudo apt install python-is-python3`
 
 ## Next Steps
 
-After the agent is installed, configure the Arduino IDE with Micro-ROS libraries for the ESP32. See the presentation in `TE3001B_Intelligent_Robotics_Implementation_2026/Week 3/Presentations/PDF/MCR2_Micro_ROS_Installation.pdf` for Arduino IDE configuration steps.
+After the agent is installed, configure the Arduino IDE with Micro-ROS libraries for the ESP32:
+
+👉 **See [ARDUINO_IDE_SETUP.md](ARDUINO_IDE_SETUP.md)** for step-by-step Arduino IDE configuration
+
+This includes:
+- Installing ESP32 board support (version 2.0.17)
+- Installing Micro-ROS Arduino library (v2.0.7-humble)
+- Configuring serial port permissions
+- Testing compilation with example sketches
 
 ## References
 
 - [Micro-ROS GitHub](https://github.com/micro-ROS)
 - [Micro-ROS Documentation](https://micro.ros.org)
+- [Arduino IDE Setup Guide](ARDUINO_IDE_SETUP.md)
+- [ESP32 Arduino Core](https://github.com/espressif/arduino-esp32)
 - Course material in `TE3001B_Intelligent_Robotics_Implementation_2026/Week 3/`
