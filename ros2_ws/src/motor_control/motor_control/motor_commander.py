@@ -1,20 +1,3 @@
-#!/usr/bin/env python3
-
-"""
-Motor Command Publisher Node
-
-This simple ROS 2 node demonstrates how to control the motor
-by publishing PWM commands to the /cmd_pwm topic.
-
-Usage:
-    ros2 run motor_control motor_commander -- --pwm <value>
-    
-Example:
-    ros2 run motor_control motor_commander -- --pwm 200  # Forward at 200/255 PWM
-    ros2 run motor_control motor_commander -- --pwm -150  # Reverse at 150/255 PWM
-    ros2 run motor_control motor_commander -- --pwm 0     # Stop motor
-"""
-
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Int16

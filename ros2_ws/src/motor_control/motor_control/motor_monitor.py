@@ -1,23 +1,3 @@
-#!/usr/bin/env python3
-
-"""
-Motor Feedback Monitor Node
-
-Subscribes to motor feedback topics and prints real-time status.
-Use rqt_plot for live graphs:
-
-    rqt_plot /motor/rpm/data /cmd_pwm/data
-
-Topics monitored:
-  - /motor/rpm     (std_msgs/Float32) : Actual RPM
-  - /motor/encoder (std_msgs/Int32)   : Encoder pulse count
-  - /motor/state   (std_msgs/Int16)   : 0=stopped, 1=running
-  - /cmd_pwm       (std_msgs/Int16)   : PWM reference command
-
-Usage:
-    ros2 run motor_control motor_monitor
-"""
-
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Float32, Int16, Int32

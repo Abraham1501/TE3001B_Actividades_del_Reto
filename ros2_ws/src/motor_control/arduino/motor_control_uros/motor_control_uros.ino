@@ -51,7 +51,7 @@
 
 // ======== Encoder Configuration ========
 #define PULSES_PER_REV 495.0f    // Encoder pulses per revolution
-#define SAMPLE_TIME_MS 100       // Control loop sample time (100ms)
+#define SAMPLE_TIME_MS 50        // Control loop sample time (50ms = 20 Hz)
 #define RPM_MAX 110.0f           // Maximum motor RPM
 #define CMD_TIMEOUT_MS 500       // Stop motor if no command received for this long (ms)
 
