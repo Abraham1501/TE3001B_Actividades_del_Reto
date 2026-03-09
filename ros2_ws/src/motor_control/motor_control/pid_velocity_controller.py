@@ -20,8 +20,11 @@ class PIDVelocityController(Node):
     def __init__(self):
         super().__init__('pid_velocity_controller')
 
-        self.declare_parameter('kp',          0.55)
-        self.declare_parameter('ki',          2.0)
+        # self.declare_parameter('kp',          0.55)
+        # self.declare_parameter('ki',          2.0)
+        # self.declare_parameter('kd',          0.05)
+        self.declare_parameter('kp',          0.3)
+        self.declare_parameter('ki',          0.8)
         self.declare_parameter('kd',          0.05)
         self.declare_parameter('rpm_max',   110.0)
         self.declare_parameter('sample_time', 0.05)   # seconds (50 ms = 20 Hz)

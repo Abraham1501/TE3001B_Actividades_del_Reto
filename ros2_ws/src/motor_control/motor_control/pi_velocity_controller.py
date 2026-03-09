@@ -110,7 +110,7 @@ class PIVelocityController(Node):
             self._u_prev = u_pct
             self._e_prev = e_pct
 
-        # ── Publish ───────────────────────────────────────────────────────────
+
         self._cmd_pwm_pub.publish(cmd)
 
         error_msg = Float32(); error_msg.data = float(e_pct if not center_stop else 0.0)
@@ -121,8 +121,6 @@ class PIVelocityController(Node):
         self._u_pct_pub.publish(u_msg)
         self._ref_rpm_pub.publish(ref_msg)
 
-
-# ── Entry point ───────────────────────────────────────────────────────────────
 
 def main(args=None):
     rclpy.init(args=args)
