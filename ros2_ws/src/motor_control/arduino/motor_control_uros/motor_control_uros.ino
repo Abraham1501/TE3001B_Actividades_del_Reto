@@ -55,6 +55,11 @@
 #define RPM_MAX 110.0f           // Maximum motor RPM
 #define CMD_TIMEOUT_MS 500       // Stop motor if no command received for this long (ms)
 
+// ======== RPM Low-Pass Filter (EMA) Configuration ========
+// alpha in (0, 1]: higher = more responsive, lower = smoother
+// At 20 Hz sample rate, alpha = 0.3 gives a time constant of ~(dt/alpha) ≈ 150 ms
+#define RPM_FILTER_ALPHA 0.3f
+
 // ======== Micro-ROS Entity Declarations ========
 rclc_support_t support;          // Micro-ROS execution context
 rclc_executor_t executor;        // Manages execution of tasks
@@ -91,6 +96,7 @@ volatile unsigned long lastCmdReceivedMs = 0; // Timestamp of last /cmd_pwm mess
 // Control loop state variables
 long previousEncoderCount = 0;           // Encoder count from last sample
 unsigned long previousMillis = 0;        // Timestamp of last control loop
+float filteredRpm = 0.0f;                // EMA-filtered RPM value
 
 // Current motor command (-255 to +255)
 volatile int16_t currentPwmCommand = 0;
@@ -154,12 +160,20 @@ void control_timer_callback(rcl_timer_t * timer, int64_t last_call_time) {
     encoderCountNow = encoderCountTotal;
     interrupts();
 
-    // Calculate RPM
+    // Calculate raw RPM from encoder pulses
     long pulsesInInterval = encoderCountNow - previousEncoderCount;
-    float rpm = 0.0f;
+    float rawRpm = 0.0f;
 
     if (deltaSec > 0.0f) {
-      rpm = (pulsesInInterval * 60.0f) / (PULSES_PER_REV * deltaSec);
+      rawRpm = (pulsesInInterval * 60.0f) / (PULSES_PER_REV * deltaSec);
+    }
+
+    // Apply Exponential Moving Average (EMA) low-pass filter
+    // Resets to raw value when motor is commanded to stop to avoid lag
+    if (currentPwmCommand == 0 && rawRpm == 0.0f) {
+      filteredRpm = 0.0f;
+    } else {
+      filteredRpm = RPM_FILTER_ALPHA * rawRpm + (1.0f - RPM_FILTER_ALPHA) * filteredRpm;
     }
 
     // Update for next iteration
@@ -167,7 +181,7 @@ void control_timer_callback(rcl_timer_t * timer, int64_t last_call_time) {
     previousMillis = now;
     
     // Publish telemetry
-    rpm_msg.data = rpm;
+    rpm_msg.data = filteredRpm;
     encoder_msg.data = (int32_t)encoderCountNow;
     state_msg.data = (currentPwmCommand != 0) ? 1 : 0;  // 1=running, 0=stopped
     

@@ -30,11 +30,11 @@ from launch_ros.actions import Node
 def generate_launch_description():
 
     kp_arg = DeclareLaunchArgument(
-        'kp', default_value='0.55',
+        'kp', default_value='0.3',
         description='PID proportional gain')
 
     ki_arg = DeclareLaunchArgument(
-        'ki', default_value='2.0',
+        'ki', default_value='0.8',
         description='PID integral gain')
 
     kd_arg = DeclareLaunchArgument(
