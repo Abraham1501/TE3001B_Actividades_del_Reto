@@ -31,7 +31,7 @@ def generate_launch_description():
 
     kp_arg = DeclareLaunchArgument(
         'kp', default_value='0.3',
-        description='PID proportional gain')
+        description='PID proportional gain')    
 
     ki_arg = DeclareLaunchArgument(
         'ki', default_value='0.8',

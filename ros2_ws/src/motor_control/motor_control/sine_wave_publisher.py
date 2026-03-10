@@ -13,7 +13,7 @@ class SineWavePublisher(Node):
         # Declare and get parameters
         self.declare_parameter('amplitude', 30.0)       # Peak RPM
         self.declare_parameter('frequency', 0.1)        # Hz
-        self.declare_parameter('offset', 30.0)           # DC offset
+        self.declare_parameter('offset', 40.0)           # DC offset
         self.declare_parameter('publish_rate', 100)     # Hz (publish frequency)
         
         self.amplitude = self.get_parameter('amplitude').value
