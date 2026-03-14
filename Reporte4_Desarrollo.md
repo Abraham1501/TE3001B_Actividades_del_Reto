@@ -86,7 +86,7 @@ void loop() {
       break;
 
     case AGENT_AVAILABLE:
-      state = (true == create_entities()) ? AGENT_CONNECTED : WAITING_AGENT;
+      state = (true == create_entities()) ? AGENT_CONNECTED : WAITING_AGENT;  
       if (state == WAITING_AGENT) { destroy_entities(); }
       break;
 

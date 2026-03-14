@@ -33,9 +33,9 @@ class PulseTrainPublisher(Node):
         super().__init__('pulse_train_publisher')
 
         # ── Parameters ────────────────────────────────────────────────
-        self.declare_parameter('high_rpm',    60.0)   # RPM during ON phase
-        self.declare_parameter('low_rpm',      0.0)   # RPM during OFF phase
-        self.declare_parameter('period',       4.0)   # Full cycle [s]
+        self.declare_parameter('high_rpm',    70.0)   # RPM during ON phase
+        self.declare_parameter('low_rpm',     -70.0)   # RPM during OFF phase
+        self.declare_parameter('period',       15.0)   # Full cycle [s]
         self.declare_parameter('duty_cycle',   0.5)   # 0.0 < duty <= 1.0
         self.declare_parameter('publish_rate', 100)   # Hz
 

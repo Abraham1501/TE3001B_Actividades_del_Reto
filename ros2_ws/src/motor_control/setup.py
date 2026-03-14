@@ -27,6 +27,7 @@ setup(
             'pid_velocity_controller = motor_control.pid_velocity_controller:main',
             'sine_wave_publisher = motor_control.sine_wave_publisher:main',
             'pulse_train_publisher = motor_control.pulse_train_publisher:main',
+            'clock_position_controller = motor_control.clock_position_controller:main',
         ],
     },
 )
